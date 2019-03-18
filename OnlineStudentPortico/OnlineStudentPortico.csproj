@@ -45,10 +45,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -133,6 +140,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\administrator\administratorAreaRegistration.cs" />
+    <Compile Include="Areas\administrator\Controllers\CountryManageController.cs" />
+    <Compile Include="Areas\administrator\Controllers\dashboardController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -166,17 +176,88 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CountryMaster.cs">
+      <DependentUpon>dbStudentPorticoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbStudentPorticoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbStudentPorticoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbStudentPorticoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbStudentPorticoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbStudentPorticoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbStudentPorticoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StateMaster.cs">
+      <DependentUpon>dbStudentPorticoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\AdminLayout\css\bootstrap-social.css" />
+    <Content Include="Content\AdminLayout\css\bootstrap-theme.min.css" />
+    <Content Include="Content\AdminLayout\css\bootstrap.min.css" />
+    <Content Include="Content\AdminLayout\css\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Content\AdminLayout\css\dataTables\dataTables.responsive.css" />
+    <Content Include="Content\AdminLayout\css\font-awesome.min.css" />
+    <Content Include="Content\AdminLayout\css\metisMenu.min.css" />
+    <Content Include="Content\AdminLayout\css\morris.css" />
+    <Content Include="Content\AdminLayout\css\startmin.css" />
+    <Content Include="Content\AdminLayout\css\timeline.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\AdminLayout\fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\AdminLayout\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\dbStudentPorticoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>dbStudentPorticoModel.Context.cs</LastGenOutput>
+      <DependentUpon>dbStudentPorticoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\dbStudentPorticoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbStudentPorticoModel.edmx</DependentUpon>
+      <LastGenOutput>dbStudentPorticoModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\AdminLayout\js\bootstrap.min.js" />
+    <Content Include="Scripts\AdminLayout\js\dataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\AdminLayout\js\dataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\AdminLayout\js\flot-data.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\excanvas.min.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.colorhelpers.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.canvas.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.categories.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.crosshair.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.errorbars.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.image.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.navigate.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.pie.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.resize.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.selection.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.stack.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.symbol.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.threshold.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.time.js" />
+    <Content Include="Scripts\AdminLayout\js\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Scripts\AdminLayout\js\jquery.min.js" />
+    <Content Include="Scripts\AdminLayout\js\metisMenu.min.js" />
+    <Content Include="Scripts\AdminLayout\js\morris-data.js" />
+    <Content Include="Scripts\AdminLayout\js\morris.min.js" />
+    <Content Include="Scripts\AdminLayout\js\raphael.min.js" />
+    <Content Include="Scripts\AdminLayout\js\startmin.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -198,6 +279,27 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="fonts\AdminLayout\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\AdminLayout\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\AdminLayout\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\AdminLayout\fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\AdminLayout\fonts\FontAwesome.otf" />
+    <Content Include="fonts\AdminLayout\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\AdminLayout\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\AdminLayout\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\AdminLayout\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\administrator\Views\web.config" />
+    <Content Include="Areas\administrator\Views\Shared\_adminLayout.cshtml" />
+    <Content Include="Areas\administrator\Views\dashboard\Index.cshtml" />
+    <EntityDeploy Include="Models\dbStudentPorticoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbStudentPorticoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dbStudentPorticoModel.edmx.diagram">
+      <DependentUpon>dbStudentPorticoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\administrator\Views\CountryManage\Index.cshtml" />
+    <Content Include="Areas\administrator\Views\Shared\_AddCountry.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -221,7 +323,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Areas\administrator\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -251,6 +353,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
